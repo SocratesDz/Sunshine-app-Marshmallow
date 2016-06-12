@@ -20,10 +20,8 @@ import org.w3c.dom.Text;
 public class DetailFragment extends Fragment {
 
     private static final String LOG_TAG = DetailFragment.class.getSimpleName();
-
-    private ShareActionProvider mShareActionProvider;
     private String mForecastStr;
-    private static final String FORECAST_SHARE_HASHTAG = "#SunshineApp";
+
 
     public DetailFragment() {
         // Required empty public constructor
@@ -50,25 +48,9 @@ public class DetailFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.detail, menu);
-        MenuItem menuItem = menu.findItem(R.id.action_share);
 
-        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
-
-        if(mShareActionProvider != null) {
-            mShareActionProvider.setShareIntent(createShareForecastIntent());
-        } else {
-            Log.d(LOG_TAG, "Share Action Provider is null?");
-        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    private Intent createShareForecastIntent() {
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-        shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT,
-                mForecastStr + FORECAST_SHARE_HASHTAG);
-        return shareIntent;
-    }
+
 }
