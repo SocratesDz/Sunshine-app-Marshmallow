@@ -11,10 +11,6 @@ import android.view.MenuItem;
 
 public class DetailActivity extends AppCompatActivity {
 
-    private ShareActionProvider mShareActionProvider;
-    private static final String LOG_TAG = DetailFragment.class.getSimpleName();
-    private static final String FORECAST_SHARE_HASHTAG = "#SunshineApp";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,16 +26,6 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.detail, menu);
-        MenuItem menuItem = menu.findItem(R.id.action_share);
-
-        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
-
-        if(mShareActionProvider != null) {
-            mShareActionProvider.setShareIntent(createShareForecastIntent());
-        } else {
-            Log.d(LOG_TAG, "Share Action Provider is null?");
-        }
-
         return true;
     }
 
@@ -55,15 +41,5 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private Intent createShareForecastIntent() {
-        String forecastStr = getIntent().getStringExtra(Intent.EXTRA_TEXT);
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-        shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT,
-                forecastStr + FORECAST_SHARE_HASHTAG);
-        return shareIntent;
     }
 }
