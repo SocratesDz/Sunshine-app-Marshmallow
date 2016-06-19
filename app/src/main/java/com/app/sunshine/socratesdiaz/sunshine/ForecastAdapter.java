@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.CursorAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.app.sunshine.socratesdiaz.sunshine.data.WeatherContract;
@@ -60,7 +61,35 @@ public class ForecastAdapter extends CursorAdapter {
         // our view is pretty simple here --- just a text view
         // we'll keep the UI functional with a simple (and slow!) binding.
 
-        TextView tv = (TextView)view;
-        tv.setText(convertCursorRowToUXFormat(cursor));
+        // Read weather icon ID from cursor
+        int weatherId = cursor.getInt(ForecastFragment.COL_WEATHER_ID);
+        // Use placeholder image for now
+        ImageView iconView = (ImageView) view.findViewById(R.id.list_item_icon);
+        iconView.setImageResource(R.mipmap.ic_launcher);
+
+        // Read date from cursor
+        long datemilis = cursor.getLong(ForecastFragment.COL_WEATHER_DATE);
+        String dateString = Utility.formatDate(datemilis);
+        TextView dateTextView = (TextView) view.findViewById(R.id.list_item_date_textview);
+        dateTextView.setText(dateString);
+
+        // Read weather forecast from cursor
+        String forecast = cursor.getString(ForecastFragment.COL_WEATHER_DESC);
+        TextView descTextView = (TextView) view.findViewById(R.id.list_item_forecast_textview);
+        descTextView.setText(forecast);
+
+        // Read user preference for metric or imperial temperature units
+        boolean isMetric = Utility.isMetric(context);
+
+        // Read high temperature from cursor
+        double high = cursor.getDouble(ForecastFragment.COL_WEATHER_MAX_TEMP);
+        TextView highView = (TextView) view.findViewById(R.id.list_item_high_textview);
+        highView.setText(Utility.formatTemperature(high, isMetric));
+
+        // Read low temperature from cursor
+        double low = cursor.getDouble(ForecastFragment.COL_WEATHER_MIN_TEMP);
+        TextView lowView = (TextView) view.findViewById(R.id.list_item_low_textview);
+        lowView.setText(Utility.formatTemperature(low, isMetric));
+
     }
 }
