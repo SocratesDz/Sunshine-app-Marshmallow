@@ -15,21 +15,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/list_item_date_textview"
-            android:layout_gravity="center"
-            android:text="Today, June 24"/>
+            android:layout_gravity="center" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/list_item_high_textview"
             android:layout_gravity="center"
-            android:text="21"
             android:textSize="18sp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/list_item_low_textview"
             android:layout_gravity="center"
-            android:text="8"
             android:textSize="18sp"/>
     </LinearLayout>
     <LinearLayout
@@ -48,7 +45,6 @@
             android:id="@+id/list_item_forecast_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Clear"/>
+            android:layout_gravity="center" />
     </LinearLayout>
 </LinearLayout>
