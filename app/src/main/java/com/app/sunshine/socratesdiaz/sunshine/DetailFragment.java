@@ -17,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.app.sunshine.socratesdiaz.sunshine.data.WeatherContract;
@@ -57,6 +58,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     private static final int COL_WEATHER_WIND_SPEED = 7;
     private static final int COL_WEATHER_DEGREES = 8;
     private static final int COL_WEATHER_CONDITION_ID = 9;
+    private static final int COL_WEATHER_LOCATION_SETTING = 10;
 
     private TextView mDayNameView;
     private TextView mDateView;
@@ -66,6 +68,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     private TextView mHumidityView;
     private TextView mWindView;
     private TextView mPressureView;
+    private ImageView mIconView;
 
     public DetailFragment() {
         // Required empty public constructor
@@ -85,6 +88,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         mHumidityView = (TextView) fragmentDetail.findViewById(R.id.detail_humidity_textview);
         mWindView = (TextView) fragmentDetail.findViewById(R.id.detail_wind_textview);
         mPressureView = (TextView) fragmentDetail.findViewById(R.id.detail_pressure_textview);
+        mIconView = (ImageView) fragmentDetail.findViewById(R.id.detail_icon);
 
         return fragmentDetail;
     }
@@ -155,6 +159,10 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             String low = Utility.formatTemperature(getContext(),
                     data.getDouble(COL_WEATHER_MIN_TEMP), isMetric);
             mLowView.setText(low);
+
+            // Icon
+            int iconId = Utility.getArtResourceForWeatherCondition(data.getInt(COL_WEATHER_CONDITION_ID));
+            mIconView.setImageResource(iconId);
 
             // Short description
             String weatherDescription = data.getString(COL_WEATHER_DESC);
