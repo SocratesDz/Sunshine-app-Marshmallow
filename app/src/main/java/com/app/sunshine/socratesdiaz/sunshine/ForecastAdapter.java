@@ -20,10 +20,15 @@ public class ForecastAdapter extends CursorAdapter {
     private static final int VIEW_TYPE_TODAY = 0;
     private static final int VIEW_TYPE_FUTURE_DAY = 1;
     private static final int VIEW_TYPE_COUNT = 2;
+    private boolean mUseTodayLayout = true;
+
+    public void setUseTodayLayout(boolean useTodayLayout) {
+        mUseTodayLayout = useTodayLayout;
+    }
 
     @Override
     public int getItemViewType(int position) {
-        return position == 0 ? VIEW_TYPE_TODAY : VIEW_TYPE_FUTURE_DAY;
+        return (position == 0 && mUseTodayLayout) ? VIEW_TYPE_TODAY : VIEW_TYPE_FUTURE_DAY;
     }
 
     @Override
@@ -31,9 +36,6 @@ public class ForecastAdapter extends CursorAdapter {
         return VIEW_TYPE_COUNT;
     }
 
-    /**
-     * Copy/paste note: Replace existing newView() method in ForecastAdapter with this one.
-     */
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         // Choose the layout type
@@ -84,9 +86,14 @@ public class ForecastAdapter extends CursorAdapter {
         ViewHolder holder = new ViewHolder(view);
 
         // Read weather icon ID from cursor
-        int weatherId = cursor.getInt(ForecastFragment.COL_WEATHER_ID);
+        int weatherId = cursor.getInt(ForecastFragment.COL_WEATHER_CONDITION_ID);
         // Use placeholder image for now
-        holder.iconView.setImageResource(R.mipmap.ic_launcher);
+        int viewType = getItemViewType(cursor.getPosition());
+        if(viewType == VIEW_TYPE_TODAY) {
+            holder.iconView.setImageResource(Utility.getArtResourceForWeatherCondition(weatherId));
+        } else if(viewType == VIEW_TYPE_FUTURE_DAY) {
+            holder.iconView.setImageResource(Utility.getIconResourceForWeatherCondition(weatherId));
+        }
 
         // Read date from cursor
         long datemilis = cursor.getLong(ForecastFragment.COL_WEATHER_DATE);
