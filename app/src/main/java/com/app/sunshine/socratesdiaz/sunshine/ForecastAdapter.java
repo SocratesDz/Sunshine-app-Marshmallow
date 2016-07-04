@@ -97,7 +97,13 @@ public class ForecastAdapter extends CursorAdapter {
 
         // Read date from cursor
         long datemilis = cursor.getLong(ForecastFragment.COL_WEATHER_DATE);
-        String dateString = Utility.formatDate(datemilis);
+        String dateString = "";
+        if(viewType == VIEW_TYPE_TODAY) {
+            dateString = Utility.getFriendlyDayString(context, datemilis);
+        }
+        else if(viewType == VIEW_TYPE_FUTURE_DAY) {
+            dateString = Utility.getDayName(context, datemilis);
+        }
         holder.dateView.setText(dateString);
 
         // Read weather forecast from cursor

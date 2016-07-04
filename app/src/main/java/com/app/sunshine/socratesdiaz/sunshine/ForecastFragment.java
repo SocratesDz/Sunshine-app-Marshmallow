@@ -134,6 +134,10 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
         if(savedInstanceState != null && savedInstanceState.containsKey(FORECAST_LIST_POSITION_KEY)) {
             mPosition = savedInstanceState.getInt(FORECAST_LIST_POSITION_KEY);
         }
+        else {
+            mPosition = 0;
+            // TODO Select first element when app is started
+        }
 
         mForecastAdapter.setUseTodayLayout(mUseTodayLayout);
 

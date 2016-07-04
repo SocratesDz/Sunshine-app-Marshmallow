@@ -82,6 +82,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        // TODO Create another view for portrait sw600dp screens
         Bundle arguments = getArguments();
         if(arguments != null) {
             mUri = arguments.getParcelable(DetailFragment.DETAIL_URI);

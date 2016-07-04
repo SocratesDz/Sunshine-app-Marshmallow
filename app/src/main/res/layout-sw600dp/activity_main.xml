@@ -6,7 +6,8 @@
     android:baselineAligned="false"
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
-    tools:context="com.app.sunshine.socratesdiaz.sunshine.MainActivity">
+    tools:context="com.app.sunshine.socratesdiaz.sunshine.MainActivity"
+    android:theme="@style/ActionBar.Solid.Sunshine.NoTitle">
 
     <!--
     This layout is a two-pane layout for the Items master/detail flow.
