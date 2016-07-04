@@ -176,6 +176,9 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             String weatherDescription = data.getString(COL_WEATHER_DESC);
             mDescView.setText(weatherDescription);
 
+            // For accessibility, add a content description to the icon field
+            mIconView.setContentDescription(weatherDescription);
+
             // Humidity
             String humidity = getString(R.string.format_humidity, data.getFloat(COL_WEATHER_HUMIDITY));
             mHumidityView.setText(humidity);

@@ -113,7 +113,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/detail_text_info_size"
+            android:layout_marginBottom="@dimen/detail_text_info_margin"
             android:textAppearance="?android:textAppearanceLarge"
+            />
+
+        <com.app.sunshine.socratesdiaz.sunshine.MyView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             />
 
     </LinearLayout>
