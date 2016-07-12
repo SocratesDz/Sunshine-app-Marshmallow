@@ -33,6 +33,10 @@
         <provider
             android:authorities="com.example.android.sunshine.app"
             android:name="com.app.sunshine.socratesdiaz.sunshine.data.WeatherProvider"/>
+
+        <service android:name=".service.SunshineService"/>
+        <receiver android:name=".service.SunshineService$AlarmReceiver"
+            android:enabled="true" />
     </application>
 
 </manifest>
