@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.app.sunshine.socratesdiaz.sunshine.sync.SunshineSyncAdapter;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements ForecastFragment.Callback {
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements ForecastFragment.
                 .findFragmentById(R.id.fragment_forecast);
         ff.setUseTodayLayout(!mTwoPane);
 
+        SunshineSyncAdapter.initializeSyncAdapter(this);
     }
 
     @Override
