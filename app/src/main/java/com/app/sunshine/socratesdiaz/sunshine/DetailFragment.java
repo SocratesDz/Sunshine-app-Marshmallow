@@ -160,12 +160,12 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
             // High temperature
             String high = Utility.formatTemperature(getContext(),
-                    data.getDouble(COL_WEATHER_MAX_TEMP), isMetric);
+                    data.getDouble(COL_WEATHER_MAX_TEMP));
             mHighView.setText(high);
 
             // Low temperature
             String low = Utility.formatTemperature(getContext(),
-                    data.getDouble(COL_WEATHER_MIN_TEMP), isMetric);
+                    data.getDouble(COL_WEATHER_MIN_TEMP));
             mLowView.setText(low);
 
             // Icon

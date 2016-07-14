@@ -84,9 +84,9 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_refresh:
+            /*case R.id.action_refresh:
                 updateWeather();
-                return true;
+                return true;*/
             case R.id.action_settings:
                 Intent settingsIntent = new Intent(getActivity(), SettingsActivity.class);
                 startActivity(settingsIntent);
@@ -178,13 +178,23 @@ public class ForecastFragment extends Fragment implements LoaderManager.LoaderCa
                 .appendQueryParameter("q", location)
                 .build();
 
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW);
-        mapIntent.setData(locationUri);
+        if(null != mForecastAdapter) {
+            Cursor c = mForecastAdapter.getCursor();
+            if(null != c) {
+                c.moveToFirst();
+                String posLat = c.getString(COL_COORD_LAT);
+                String posLong = c.getString(COL_COORD_LONG);
+                Uri geoLocation = Uri.parse("geo:"+ posLat + "," + posLong);
 
-        if(mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-            startActivity(mapIntent);
-        } else {
-            Log.d(LOG_TAG, "Error: Couldn't call map intent");
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW);
+                mapIntent.setData(locationUri);
+
+                if(mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    startActivity(mapIntent);
+                } else {
+                    Log.d(LOG_TAG, "Error: Couldn't call map intent");
+                }
+            }
         }
     }
 
